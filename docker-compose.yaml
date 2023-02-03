@@ -13,12 +13,12 @@ services:
   app:
     build: app/.
     platform: linux/amd64
-    #depends_on:
-    #  - proxy
+    depends_on:
+      - proxy
     ports:
       - "8080:8080"
-    #volumes:
-    #  - $PWD/proxy/certs/tls-ca-chain.pem:/tmp/certs/tls-ca-chain.pem
+    volumes:
+      - $PWD/proxy/certs:/tmp/certs:rw
     environment:
       NEW_RELIC_APP_NAME: "SQUID-TLS1.0-BUMP-Kenzo-3370"
       NEW_RELIC_LICENSE_KEY: ""
