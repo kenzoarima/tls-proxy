@@ -1,6 +1,6 @@
 # JDK 11.0.10 is intentional; this version still permits TLSv1 and TLSv1.1
 #FROM openjdk:11.0.10-jre
-FROM openjdk:9.0.1-jre
+FROM openjdk:8u342-jre
 WORKDIR /tmp
 USER root
 COPY spring-petclinic-2.7.3.jar app.jar
