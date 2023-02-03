@@ -9,7 +9,7 @@ COPY spring-petclinic-2.7.3.jar app.jar
 COPY 3_37_0/newrelic-agent-3.37.0.jar /tmp
 COPY 3_37_0/newrelic.yml /tmp
 ENV NEW_RELIC_LOG_FILE_NAME="STDOUT"
-ENTRYPOINT ["java","-javaagent:/tmp/newrelic-agent-3.37.0.jar","-Djdk.tls.server.protocols=TLSv1","-Djdk.tls.client.protocols=TLSv1","-jar","/tmp/app.jar"]
+ENTRYPOINT ["java","-javaagent:/tmp/newrelic-agent-3.37.0.jar","-Djdk.tls.server.protocols=TLSv1","-Djdk.tls.client.protocols=TLSv1","-Djavax.net.ssl.trustStore=/tmp/certs/test.jks","-jar","/tmp/app.jar"]
 #ENTRYPOINT ["java","-javaagent:/tmp/newrelic-v6.5.4-TLSv1.2-SNAPSHOT.jar","-Djdk.tls.server.protocols=TLSv1","-Djdk.tls.client.protocols=TLSv1","-jar","/tmp/app.jar"]
 #ENTRYPOINT ["java","-javaagent:/tmp/newrelic-agent-7.11.1.jar","-Djdk.tls.server.protocols=TLSv1","-Djdk.tls.client.protocols=TLSv1","-jar","/tmp/app.jar"]
 # TLS DEBUG: very verbose
