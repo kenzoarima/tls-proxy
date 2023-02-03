@@ -1,13 +1,16 @@
 # JDK 11.0.10 is intentional; this version still permits TLSv1 and TLSv1.1
-FROM openjdk:11.0.10-jre
+#FROM openjdk:11.0.10-jre
+FROM openjdk:9.0.1-jre
 WORKDIR /tmp
 USER root
 COPY spring-petclinic-2.7.3.jar app.jar
 #RUN wget --quiet https://download.newrelic.com/newrelic/java-agent/newrelic-agent/7.11.1/newrelic-agent-7.11.1.jar
-COPY newrelic-v6.5.4-TLSv1.2-SNAPSHOT.jar /tmp
-COPY newrelic.yml /tmp
+#COPY newrelic-v6.5.4-TLSv1.2-SNAPSHOT.jar /tmp
+COPY 3_37_0/newrelic-agent-3.37.0.jar /tmp
+COPY 3_37_0/newrelic.yml /tmp
 ENV NEW_RELIC_LOG_FILE_NAME="STDOUT"
-ENTRYPOINT ["java","-javaagent:/tmp/newrelic-v6.5.4-TLSv1.2-SNAPSHOT.jar","-Djdk.tls.server.protocols=TLSv1","-Djdk.tls.client.protocols=TLSv1","-jar","/tmp/app.jar"]
+ENTRYPOINT ["java","-javaagent:/tmp/newrelic-agent-3.37.0.jar","-Djdk.tls.server.protocols=TLSv1","-Djdk.tls.client.protocols=TLSv1","-jar","/tmp/app.jar"]
+#ENTRYPOINT ["java","-javaagent:/tmp/newrelic-v6.5.4-TLSv1.2-SNAPSHOT.jar","-Djdk.tls.server.protocols=TLSv1","-Djdk.tls.client.protocols=TLSv1","-jar","/tmp/app.jar"]
 #ENTRYPOINT ["java","-javaagent:/tmp/newrelic-agent-7.11.1.jar","-Djdk.tls.server.protocols=TLSv1","-Djdk.tls.client.protocols=TLSv1","-jar","/tmp/app.jar"]
 # TLS DEBUG: very verbose
 #ENTRYPOINT ["java","-javaagent:/tmp/newrelic-agent-7.11.1.jar","-Djdk.tls.server.protocols=TLSv1","-Djdk.tls.client.protocols=TLSv1","-Djavax.net.debug=all","-jar","/tmp/app.jar"]
